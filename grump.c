@@ -48,7 +48,7 @@ static void print_usage()
 
 int main(int argc, char **argv)
 {
-  int    serial_fd, file_fd = -1;
+  int    serial_fd;
   char  *serial_portname = NULL;
   struct termios term, saved_term;
   fd_set rd_map;
@@ -175,7 +175,7 @@ int main(int argc, char **argv)
       if (len != 1)
       {
         // really should check what happened more carefully
-        printf("!!! read %d chars instead of 1\n",len);
+        printf("!!! read %ld chars instead of 1\n",len);
         continue;
       }
       else if (ch == 3)
@@ -196,7 +196,7 @@ int main(int argc, char **argv)
       ssize_t len = read(serial_fd, &bb, 1);
       if (len != 1)
       {
-        fprintf(stderr,"Error reading from serial port (read %d): %s",
+        fprintf(stderr,"Error reading from serial port (read %ld): %s",
                 len,strerror(errno));
         return 1;
       }
